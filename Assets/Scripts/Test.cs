@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    puvlic GameObject[] pictures;
+    public GameObject[] pictures;
     Vector3 mousePosition;
 
     void Update()
@@ -13,12 +13,12 @@ public class Test : MonoBehaviour
         {
             mousePosition = Input.mousePosition;
             mousePosition.z = 1.0f;
-            Instantiate(RandomObject(), Camera.main.ScreenToWorldPoint(mousePosition), Quaternion.identity;)
+            Instantiate(RandomObject(), Camera.main.ScreenToWorldPoint(mousePosition), Quaternion.identity);
         }
     }
     GameObject RandomObject()
     {
-        int number = RandomObject.Rnage(0, pictures.Length);
+        int number = Random.Range(0, pictures.Length);
         return pictures[number];
     }
 }
