@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using SFB;
 
 [RequireComponent(typeof(Button))]
-public class OpenImage1 : MonoBehaviour, IPointerDownHandler {
+public class OpenImage3 : MonoBehaviour, IPointerDownHandler {
     public RawImage output;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -17,14 +17,16 @@ public class OpenImage1 : MonoBehaviour, IPointerDownHandler {
     //
     [DllImport("__Internal")]
     private static extern void UploadFile(string gameObjectName, string methodName, string filter, bool multiple);
+    public static string ImageURL3;//
 
     public void OnPointerDown(PointerEventData eventData) {
         UploadFile(gameObject.name, "OnFileUpload", ".png, .jpg", false);
     }
 
     // Called from browser
-    public void OnFileUpload(string url1) {
-        StartCoroutine(OutputRoutine(url1));
+    public void OnFileUpload(string url3) {
+        StartCoroutine(OutputRoutine(url3));
+        ImageURL3 = url3;//
     }
 #else
     //
@@ -45,8 +47,8 @@ public class OpenImage1 : MonoBehaviour, IPointerDownHandler {
     }
 #endif
 
-    private IEnumerator OutputRoutine(string url1) {
-        var loader = new WWW(url1);
+    private IEnumerator OutputRoutine(string url3) {
+        var loader = new WWW(url3);
         yield return loader;
         output.texture = loader.texture;
     }

@@ -23,8 +23,8 @@ public class OpenImage2 : MonoBehaviour, IPointerDownHandler {
     }
 
     // Called from browser
-    public void OnFileUpload(string url) {
-        StartCoroutine(OutputRoutine(url));
+    public void OnFileUpload(string url2) {
+        StartCoroutine(OutputRoutine(url2));
     }
 #else
     //
@@ -45,8 +45,8 @@ public class OpenImage2 : MonoBehaviour, IPointerDownHandler {
     }
 #endif
 
-    private IEnumerator OutputRoutine(string url) {
-        var loader = new WWW(url);
+    private IEnumerator OutputRoutine(string url2) {
+        var loader = new WWW(url2);
         yield return loader;
         output.texture = loader.texture;
     }
