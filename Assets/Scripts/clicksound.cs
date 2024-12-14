@@ -26,7 +26,7 @@ private bool isCooldown = false;
     {
         // クールダウンを開始
         isCooldown = true;
-        yield return new WaitForSeconds(1.0f); // 1.0秒間待機
+        yield return new WaitForSeconds(2.0f); // 2.0秒間待機
         isCooldown = false; // クールダウン終了
     }
 }
