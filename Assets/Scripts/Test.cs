@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test2 : MonoBehaviour
+public class Test : MonoBehaviour
 {
     public GameObject[] pictures;
     Vector3 mousePosition;

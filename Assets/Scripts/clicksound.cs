@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour {
+public class ClickSound : MonoBehaviour {
 
 public AudioClip sound1;
 AudioSource audioSource;
