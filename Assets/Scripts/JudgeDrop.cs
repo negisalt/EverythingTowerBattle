@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DropJudge : MonoBehaviour
+public class JudgeDrop : MonoBehaviour
 {
     [SerializeField] GameObject gameOverPanel;
     [SerializeField] GameObject playPanel;
