@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      shika_0: 7155491711170754544
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
