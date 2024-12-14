@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "C0deHackathon.sln"
+    "dotnet.defaultSolution": "EverythingTowerBattle.sln"
 }
