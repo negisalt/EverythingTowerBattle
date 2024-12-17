@@ -13,10 +13,12 @@ public class Menu : MonoBehaviour
     {
         playPanel.SetActive(false);
         menuPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
     public void ToPlay()
     {
         playPanel.SetActive(true);
         menuPanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
