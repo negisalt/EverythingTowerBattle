@@ -3,13 +3,11 @@ using UnityEngine.UI;
 
 public class JudgeDrop : MonoBehaviour
 {
-    [SerializeField] GameObject gameOverPanel;
-    [SerializeField] GameObject playPanel;
+    [SerializeField] GameObject GOcanvas;
 
     private void Start()
     {
-        gameOverPanel.SetActive(false);
-        playPanel.SetActive(true);
+        GOcanvas.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,9 +20,7 @@ public class JudgeDrop : MonoBehaviour
     }
     private void ToGameOver()
     {
-        gameOverPanel.SetActive(true);
-        playPanel.SetActive(false);
-
+        GOcanvas.SetActive(true);
         // 時間を停止
         Time.timeScale = 0f;
     }
