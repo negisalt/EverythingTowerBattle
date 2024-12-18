@@ -6,7 +6,7 @@ public class CreateObjGame : MonoBehaviour
     private Vector2 mouPos;
     private bool leaveMouse;
     private GameObject obj;
-    private GameObject obj1;
+    public GameObject obj1;
     void Start()
     {
         obj1 = new GameObject();
@@ -16,35 +16,36 @@ public class CreateObjGame : MonoBehaviour
         obj1.AddComponent<PolygonCollider2D>();
         obj1.AddComponent<Rigidbody2D>(); 
 
+        Vector2 o1 = Camera.main.ScreenToWorldPoint(new Vector2(60, 300));
+        obj1.transform.position = o1;
+
         count = 0;
         leaveMouse = true;
     }
     public void Update()
     {
         mouPos = Input.mousePosition;
+        Vector2 pos = Camera.main.ScreenToWorldPoint(new Vector2(mouPos.x, 300));
         if(leaveMouse)
         {
-            obj = Instantiate(obj1, new Vector2(0, 30), Quaternion.identity);
+            obj = Instantiate(obj1, new Vector2(0, 60), Quaternion.identity);//create object
             obj.GetComponent<Rigidbody2D>().isKinematic = true;
-            count++;
-            leaveMouse = true;
+            leaveMouse = false;
             Debug.Log(leaveMouse);
-        } else if (leaveMouse == 2)
+        } else if (!leaveMouse)
         {
-            /*
-            Vector3 obj1Pos = Camera.main.ScreenToWorldPoint(new Vector2(mouPos.x, 100));
-            obj1.transform.position = obj1Pos;*/
+            obj.transform.position = pos;
             if(Input.GetMouseButtonDown(0))
             {
                 obj.GetComponent<Rigidbody2D>().isKinematic = false;
-                Debug.Log(leaveMouse);
-                Invoke("Timer", 2.0f);
+                //leaveMouse = true;
+                Invoke("Timer", 0.5f);
             }
         }
     }
     private void Timer()
     {
-        leaveMouse = false;
+        leaveMouse = true;
         Debug.Log(leaveMouse);
     }
 }
