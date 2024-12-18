@@ -17,10 +17,10 @@ public class SaveImage : MonoBehaviour
     public static Sprite spr2;
     public static Sprite spr3;
     
-    public void Start()
+    /*public void Start()
     {
         //obj1.AddComponent<SpriteRenderer>();
-    }
+    }*/
     public void OnClick()
     {
         StartCoroutine(Spr1());

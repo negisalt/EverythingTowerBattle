@@ -5,6 +5,12 @@ public class CreateObj : MonoBehaviour
     public GameObject obj1;
     public GameObject obj2;
     public GameObject obj3;
+    void Start()
+    {
+        obj1.AddComponent<SpriteRenderer>();
+        obj2.AddComponent<SpriteRenderer>();
+        obj3.AddComponent<SpriteRenderer>();
+    }
     public void OnClick()
     {
         AddCom1();
