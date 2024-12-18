@@ -16,14 +16,14 @@ public class SaveImage3 : MonoBehaviour
     
     public void Start()
     {
-
+        obj.AddComponent<SpriteRenderer>();
     }
     public void OnClick()
     {
-        StartCoroutine(Rick());
+        StartCoroutine(Spr());
         AddCom();
     }
-    private IEnumerator Rick()
+    private IEnumerator Spr()
     {
         Debug.Log(OpenImage3.ImageURL3);
         var loa = new WWW(OpenImage3.ImageURL3);
@@ -31,10 +31,13 @@ public class SaveImage3 : MonoBehaviour
         //output.texture = loa.texture;
         tex = loa.texture;
         spr = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
-        obj.sprite = spr;
+        //obj.sprite = spr;
     }
     private void AddCom()
     {
+        SpriteRenderer sprd = obj.GetComponent<SpriteRenderer>();
+        sprd.sprite = spr;
         obj.AddComponent<Rigidbody2D>();
+        obj.AddComponent<PolygonCollider2D>();
     }
 }
