@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using SFB;
 
 public class SaveImage : MonoBehaviour
@@ -23,10 +24,16 @@ public class SaveImage : MonoBehaviour
     }*/
     public void OnClick()
     {
+        //LoadScene(Test);
         StartCoroutine(Spr1());
         StartCoroutine(Spr2());
         StartCoroutine(Spr3());
         //AddCom();
+    }
+    public void LoadScene(string SceneName)
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneName);
     }
     private IEnumerator Spr1()
     {
