@@ -48,11 +48,9 @@ public class OpenImage3 : MonoBehaviour, IPointerDownHandler {
 #endif
 
     public static string ImageURL3;//
-    //public static  Loader3;
     private IEnumerator OutputRoutine(string url3) {
         var loader = new WWW(url3);
         ImageURL3 = url3;
-        //Loader3 = loader;
         yield return loader;
         output.texture = loader.texture;
     }
