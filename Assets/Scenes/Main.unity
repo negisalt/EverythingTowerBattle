@@ -2689,7 +2689,7 @@ Transform:
   m_GameObject: {fileID: 1393677527}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -60, z: 0}
+  m_LocalPosition: {x: 0, y: -50, z: 0}
   m_LocalScale: {x: 180, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2785,7 +2785,6 @@ GameObject:
   - component: {fileID: 1523085233}
   - component: {fileID: 1523085232}
   - component: {fileID: 1523085235}
-  - component: {fileID: 1523085236}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -2921,21 +2920,6 @@ MonoBehaviour:
   tex1: {fileID: 0}
   tex2: {fileID: 0}
   tex3: {fileID: 0}
---- !u!114 &1523085236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1523085230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a08659074ebf294abded08066872cfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj1: {fileID: 0}
-  obj2: {fileID: 0}
-  obj3: {fileID: 0}
 --- !u!1 &1566463392
 GameObject:
   m_ObjectHideFlags: 0
@@ -3897,3 +3881,4 @@ SceneRoots:
   - {fileID: 1566463394}
   - {fileID: 908288805}
   - {fileID: 9669783}
+  - {fileID: 1393677531}

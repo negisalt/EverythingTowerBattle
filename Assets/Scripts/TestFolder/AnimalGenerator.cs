@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AnimalGenerator : MonoBehaviour{
 
-    public GameObject[] animals;//どうぶつ取得配列
+    public GameObject obj;//どうぶつ取得配列
     public Camera mainCamera;//カメラ取得用変数
-    public float pivotHeight = 3;//生成位置の基準
+    public float pivotHeight = 200;//生成位置の基準
 
     public static int animalNum = 0;//生成された動物の個数を保管
     public static bool isGameOver = false;//ゲームオーバー判定
@@ -18,6 +18,7 @@ public class AnimalGenerator : MonoBehaviour{
     private void Start()
     {
         Init();
+        Original();
     }
 
     // 初期化処理
@@ -27,6 +28,18 @@ public class AnimalGenerator : MonoBehaviour{
         isGameOver = false;
         Animal.isMoves.Clear();//移動してる動物のリストを初期化
         StartCoroutine(StateReset());
+    }
+
+    //自分の画像を持ってくる
+    void Original()
+    {
+        obj = new GameObject();
+        obj.AddComponent<SpriteRenderer>();
+        SpriteRenderer sprd = obj.GetComponent<SpriteRenderer>();
+        sprd.sprite = SaveImage.spr1;
+        obj.AddComponent<PolygonCollider2D>();
+        obj.AddComponent<Rigidbody2D>(); 
+        obj.AddComponent<Animal>();
     }
 
     // 毎フレーム呼び出される(60fpsだったら1秒間に60回)
@@ -50,22 +63,21 @@ public class AnimalGenerator : MonoBehaviour{
         }
 
         Vector2 v = new Vector2(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, pivotHeight);
+        geneAnimal.transform.position = v;
+        float roll = Input.GetAxis("Mouse ScrollWheel");
+        geneAnimal.transform.Rotate(new Vector3(0, 0, roll));
 
-        if (Input.GetMouseButtonUp(0))//もし（マウス左クリックが離されたら）
-        {
-            if (!RotateButton.onButtonDown)//ボタンをクリックしていたら反応させない
-            {
-                geneAnimal.transform.position = v;
-                geneAnimal.GetComponent<Rigidbody2D>().isKinematic = false;//――――物理挙動・オン
-                animalNum++;//どうぶつ生成
-                isFall = true;//落ちて、どうぞ
-            }
-            RotateButton.onButtonDown = false;//マウスが上がったらボタンも離れたと思う
+        if (Input.GetMouseButtonDown(0))//もし（マウス左クリックが押されたら）
+        { 
+            geneAnimal.GetComponent<Rigidbody2D>().isKinematic = false;//――――物理挙動・オン
+            animalNum++;//どうぶつ生成
+            isFall = true;//落ちる
         }
-        else if(Input.GetMouseButton(0))//ボタンが押されている間
+
+        /*else if(Input.GetMouseButton(0))//回転ボタンが押されている間
         {
             geneAnimal.transform.position = v;
-        }
+        }*/
 	}
 
     // 生成・落下状態をリセットするコルーチン
@@ -89,7 +101,7 @@ public class AnimalGenerator : MonoBehaviour{
             mainCamera.transform.Translate(0,0.1f,0);//カメラを少し上に移動
             pivotHeight += 0.1f;//生成位置も少し上に移動
         }
-        geneAnimal = Instantiate(animals[Random.Range(0, animals.Length)], new Vector2(0, pivotHeight), Quaternion.identity);//回転せずに生成
+        geneAnimal = Instantiate(obj, new Vector2(0, pivotHeight), Quaternion.identity);//回転せずに生成
         geneAnimal.GetComponent<Rigidbody2D>().isKinematic = true;//物理挙動をさせない状態にする
     }
 
@@ -102,10 +114,10 @@ public class AnimalGenerator : MonoBehaviour{
     }
 
     // リトライボタン
-    public void Retry()
+    /*public void Retry()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
-    }
+    }*/
 
     // 移動中かチェック
     bool CheckMove(List<Moving> isMoves)
