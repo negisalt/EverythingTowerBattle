@@ -6,39 +6,43 @@ public class CreateObjGame : MonoBehaviour
     private Vector2 mouPos;
     private bool leaveMouse;
     private GameObject obj;
-    public GameObject obj1;
+    private GameObject obj1;
+    private GameObject obj2;
     void Start()
     {
+
+        /*
         obj1 = new GameObject();
         obj1.AddComponent<SpriteRenderer>();
         SpriteRenderer sprd = obj1.GetComponent<SpriteRenderer>();
         sprd.sprite = SaveImage.spr1;
         obj1.AddComponent<PolygonCollider2D>();
-        obj1.AddComponent<Rigidbody2D>(); 
+        obj1.GetComponent<PolygonCollider2D>().enabled = false;
+        obj1.AddComponent<Rigidbody2D>();
 
         Vector2 o1 = Camera.main.ScreenToWorldPoint(new Vector2(60, 300));
         obj1.transform.position = o1;
+        */
 
+        Original01();
         count = 0;
         leaveMouse = true;
     }
-    public void Update()
+    public void FixedUpdate()
     {
         mouPos = Input.mousePosition;
         Vector2 pos = Camera.main.ScreenToWorldPoint(new Vector2(mouPos.x, 300));
-        if(leaveMouse)
+        if (leaveMouse)
         {
-            obj = Instantiate(obj1, new Vector2(0, 60), Quaternion.identity);//create object
-            obj.GetComponent<Rigidbody2D>().isKinematic = true;
             leaveMouse = false;
             Debug.Log(leaveMouse);
-        } else if (!leaveMouse)
+        }
+        else if (!leaveMouse)
         {
             obj.transform.position = pos;
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
-                obj.GetComponent<Rigidbody2D>().isKinematic = false;
-                //leaveMouse = true;
+                obj = Instantiate(obj1, new Vector2(0, 30), Quaternion.identity);//create object
                 Invoke("Timer", 0.5f);
             }
         }
@@ -47,5 +51,31 @@ public class CreateObjGame : MonoBehaviour
     {
         leaveMouse = true;
         Debug.Log(leaveMouse);
+    }
+    private void Original01()
+    {
+        obj1 = new GameObject();
+        obj1.AddComponent<SpriteRenderer>();
+        SpriteRenderer sprd = obj1.GetComponent<SpriteRenderer>();
+        sprd.sprite = SaveImage.spr1;
+        obj1.AddComponent<PolygonCollider2D>();
+        obj1.GetComponent<PolygonCollider2D>().enabled = false;
+        obj1.AddComponent<Rigidbody2D>();
+
+        Vector2 o1 = Camera.main.ScreenToWorldPoint(new Vector2(60, 300));
+        obj1.transform.position = o1;
+    }
+    private void Original02()
+    {
+        obj2 = new GameObject();
+        obj2.AddComponent<SpriteRenderer>();
+        SpriteRenderer sprd = obj2.GetComponent<SpriteRenderer>();
+        sprd.sprite = SaveImage.spr1;
+        obj2.AddComponent<PolygonCollider2D>();
+        obj2.GetComponent<PolygonCollider2D>().enabled = false;
+        obj2.AddComponent<Rigidbody2D>();
+
+        Vector2 o2 = Camera.main.ScreenToWorldPoint(new Vector2(-60, 300));
+        obj2.transform.position = o2;
     }
 }
