@@ -15,14 +15,16 @@ public class CreateObjGame : MonoBehaviour
         Original01();
         Original02();
         count = 0;
-        randomNum = 1;
+        randomNum = 0;
         leaveMouse = 0;
     }
-    public void FixedUpdate()
+    public void Update()
     {
         mouPos = Input.mousePosition;
+        pos = Camera.main.ScreenToWorldPoint(new Vector2(mouPos.x, 300));
         if (leaveMouse == 0)//生成
         {
+            randomNum = Random.Range(1, 3);
             if (randomNum == 1)
             {
                 obj = Instantiate(obj1);
@@ -33,9 +35,8 @@ public class CreateObjGame : MonoBehaviour
             }
             leaveMouse = 1;
         }
-        else if (leaveMouse == 1)//落とす
+        else if (leaveMouse == 1)//横移動＆落とす
         {
-            pos = Camera.main.ScreenToWorldPoint(new Vector2(mouPos.x, 300));
             if (Input.GetMouseButtonDown(0))
             {
                 obj.transform.position = pos;
@@ -44,12 +45,11 @@ public class CreateObjGame : MonoBehaviour
         }
         else if (leaveMouse == 2)//待機
         {
-            Invoke("Timer", 0.5f);
+            Invoke("Timer", 1.0f);
         }
     }
     private void Timer()
     {
-        randomNum = Random.Range(1, 3);
         leaveMouse = 0;
         Debug.Log("randomNum = " + randomNum);
     }
@@ -60,7 +60,7 @@ public class CreateObjGame : MonoBehaviour
         SpriteRenderer sprd = obj1.GetComponent<SpriteRenderer>();
         sprd.sprite = SaveImage.spr1;
         obj1.AddComponent<PolygonCollider2D>();
-        //obj1.GetComponent<PolygonCollider2D>().enabled = false;
+        obj1.GetComponent<PolygonCollider2D>().enabled = false;
         obj1.AddComponent<Rigidbody2D>();
 
         Vector2 o1 = Camera.main.ScreenToWorldPoint(new Vector2(0, 300));
