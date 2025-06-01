@@ -73,7 +73,7 @@ public class CreateObjGame : MonoBehaviour
         SpriteRenderer sprd = obj2.GetComponent<SpriteRenderer>();
         sprd.sprite = SaveImage.spr2;
         obj2.AddComponent<PolygonCollider2D>();
-        //obj2.GetComponent<PolygonCollider2D>().enabled = false;
+        obj2.GetComponent<PolygonCollider2D>().enabled = false;
         obj2.AddComponent<Rigidbody2D>();
 
         Vector2 o2 = Camera.main.ScreenToWorldPoint(new Vector2(0, 200));
