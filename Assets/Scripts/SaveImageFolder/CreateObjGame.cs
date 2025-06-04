@@ -4,7 +4,7 @@ public class CreateObjGame : MonoBehaviour
 {
     private int count;
     private Vector2 mouPos;
-    private int leaveMouse;
+    private int fallObj;
     private int randomNum;
     private Vector2 pos;
     private GameObject obj;
@@ -16,42 +16,47 @@ public class CreateObjGame : MonoBehaviour
         Original02();
         count = 0;
         randomNum = 0;
-        leaveMouse = 0;
+        fallObj = 0;//leaveMouse
     }
     public void Update()
     {
         mouPos = Input.mousePosition;
         pos = Camera.main.ScreenToWorldPoint(new Vector2(mouPos.x, 300));
-        if (leaveMouse == 0)//生成
+        if (fallObj == 0)//生成
         {
-            randomNum = Random.Range(1, 3);
-            if (randomNum == 1)
-            {
-                obj = Instantiate(obj1);
-            }
-            else if (randomNum == 2)
-            {
-                obj = Instantiate(obj2);
-            }
-            leaveMouse = 1;
+            CreateObj();
+            fallObj = 1;
         }
-        else if (leaveMouse == 1)//横移動＆落とす
+        else if (fallObj == 1)//横移動＆落とす
         {
             if (Input.GetMouseButtonDown(0))
             {
                 obj.transform.position = pos;
-                leaveMouse = 2;
+                fallObj = 2;
             }
         }
-        else if (leaveMouse == 2)//待機
+        else if (fallObj == 2)//待機
         {
             Invoke("Timer", 1.0f);
         }
+        Debug.Log("bool fallObj -> " + fallObj);
     }
     private void Timer()
     {
-        leaveMouse = 0;
+        fallObj = 0;
         Debug.Log("randomNum = " + randomNum);
+    }
+    private void CreateObj()
+    {
+        randomNum = Random.Range(1, 3);
+        if (randomNum == 1)
+        {
+            obj = Instantiate(obj1);
+        }
+        else if (randomNum == 2)
+        {
+            obj = Instantiate(obj2);
+        }
     }
     private void Original01()
     {
