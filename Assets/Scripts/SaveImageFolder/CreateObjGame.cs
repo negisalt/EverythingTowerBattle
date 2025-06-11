@@ -86,7 +86,7 @@ public class CreateObjGame : MonoBehaviour
         Rigidbody2D rb1 = obj1.AddComponent<Rigidbody2D>();
         rb1.bodyType = RigidbodyType2D.Kinematic;
 
-        Vector2 o1 = Camera.main.ScreenToWorldPoint(new Vector2(0, 300));
+        Vector2 o1 = Camera.main.ScreenToWorldPoint(new Vector2(0, 500));
         obj1.transform.position = o1;
     }
     private void Original02()
@@ -99,7 +99,7 @@ public class CreateObjGame : MonoBehaviour
         Rigidbody2D rb2 = obj2.AddComponent<Rigidbody2D>();
         rb2.bodyType = RigidbodyType2D.Kinematic;
 
-        Vector2 o2 = Camera.main.ScreenToWorldPoint(new Vector2(0, 250));
+        Vector2 o2 = Camera.main.ScreenToWorldPoint(new Vector2(50, 500));
         obj2.transform.position = o2;
     }
     private void Original03()
@@ -112,7 +112,7 @@ public class CreateObjGame : MonoBehaviour
         Rigidbody2D rb3 = obj3.AddComponent<Rigidbody2D>();
         rb3.bodyType = RigidbodyType2D.Kinematic;
 
-        Vector2 o3 = Camera.main.ScreenToWorldPoint(new Vector2(0, 200));
+        Vector2 o3 = Camera.main.ScreenToWorldPoint(new Vector2(100, 500));
         obj2.transform.position = o3;
     }
 }
