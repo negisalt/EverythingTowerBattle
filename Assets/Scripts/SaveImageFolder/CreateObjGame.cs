@@ -5,18 +5,23 @@ public class CreateObjGame : MonoBehaviour
     private int count;
     private Vector2 mouPos;
     private int fallObj;
+    private bool created;
     private int randomNum;
     private Vector2 pos;
     private GameObject obj;
     private GameObject obj1;
     private GameObject obj2;
+    private GameObject obj3;
+    private Rigidbody2D rb;
     void Start()
     {
         Original01();
         Original02();
+        Original03();
         count = 0;
         randomNum = 0;
         fallObj = 0;//leaveMouse
+        created = true;
     }
     public void Update()
     {
@@ -29,33 +34,46 @@ public class CreateObjGame : MonoBehaviour
         }
         else if (fallObj == 1)//横移動＆落とす
         {
+            rb.MovePosition(pos);
             if (Input.GetMouseButtonDown(0))
             {
                 obj.transform.position = pos;
+                rb.bodyType = RigidbodyType2D.Dynamic;
                 fallObj = 2;
+                created = true;
             }
         }
         else if (fallObj == 2)//待機
         {
-            Invoke("Timer", 1.0f);
+            Invoke("Timer", 2.0f);
         }
-        Debug.Log("bool fallObj -> " + fallObj);
+        Debug.Log("fallObj -> " + fallObj);
+        Debug.Log("created -> " + created);
     }
     private void Timer()
     {
         fallObj = 0;
-        Debug.Log("randomNum = " + randomNum);
     }
     private void CreateObj()
     {
-        randomNum = Random.Range(1, 3);
-        if (randomNum == 1)
+        randomNum = Random.Range(1, 4);
+        if (created)
         {
-            obj = Instantiate(obj1);
-        }
-        else if (randomNum == 2)
-        {
-            obj = Instantiate(obj2);
+            if (randomNum == 1)
+            {
+                obj = Instantiate(obj1);
+            }
+            else if (randomNum == 2)
+            {
+                obj = Instantiate(obj2);
+            }
+            else if (randomNum == 3)
+            {
+                obj = Instantiate(obj3);
+            }
+            rb = obj.GetComponent<Rigidbody2D>();
+            created = false;
+            Debug.Log("CreateObj -> Done");
         }
     }
     private void Original01()
@@ -65,8 +83,8 @@ public class CreateObjGame : MonoBehaviour
         SpriteRenderer sprd = obj1.GetComponent<SpriteRenderer>();
         sprd.sprite = SaveImage.spr1;
         obj1.AddComponent<PolygonCollider2D>();
-        obj1.GetComponent<PolygonCollider2D>().enabled = false;
-        obj1.AddComponent<Rigidbody2D>();
+        Rigidbody2D rb1 = obj1.AddComponent<Rigidbody2D>();
+        rb1.bodyType = RigidbodyType2D.Kinematic;
 
         Vector2 o1 = Camera.main.ScreenToWorldPoint(new Vector2(0, 300));
         obj1.transform.position = o1;
@@ -78,10 +96,23 @@ public class CreateObjGame : MonoBehaviour
         SpriteRenderer sprd = obj2.GetComponent<SpriteRenderer>();
         sprd.sprite = SaveImage.spr2;
         obj2.AddComponent<PolygonCollider2D>();
-        obj2.GetComponent<PolygonCollider2D>().enabled = false;
-        obj2.AddComponent<Rigidbody2D>();
+        Rigidbody2D rb2 = obj2.AddComponent<Rigidbody2D>();
+        rb2.bodyType = RigidbodyType2D.Kinematic;
 
-        Vector2 o2 = Camera.main.ScreenToWorldPoint(new Vector2(0, 200));
+        Vector2 o2 = Camera.main.ScreenToWorldPoint(new Vector2(0, 250));
         obj2.transform.position = o2;
+    }
+    private void Original03()
+    {
+        obj3 = new GameObject();
+        obj3.AddComponent<SpriteRenderer>();
+        SpriteRenderer sprd = obj3.GetComponent<SpriteRenderer>();
+        sprd.sprite = SaveImage.spr3;
+        obj3.AddComponent<PolygonCollider2D>();
+        Rigidbody2D rb3 = obj3.AddComponent<Rigidbody2D>();
+        rb3.bodyType = RigidbodyType2D.Kinematic;
+
+        Vector2 o3 = Camera.main.ScreenToWorldPoint(new Vector2(0, 200));
+        obj2.transform.position = o3;
     }
 }
