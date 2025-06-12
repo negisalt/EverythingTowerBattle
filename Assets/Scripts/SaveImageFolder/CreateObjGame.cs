@@ -102,7 +102,7 @@ public class CreateObjGame : MonoBehaviour
         //
         //
         obj.AddComponent<PolygonCollider2D>();
-        obj.GetComponent<PolygonCollider2D>().enabled = false;
+        //obj.GetComponent<PolygonCollider2D>().enabled = false;
         Rigidbody2D rb = obj.AddComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
 
