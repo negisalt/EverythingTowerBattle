@@ -9,15 +9,15 @@ public class CreateObjGame : MonoBehaviour
     private int randomNum;
     private Vector2 pos;
     private GameObject obj;
-    private GameObject obj1;
-    private GameObject obj2;
-    private GameObject obj3;
+    //private GameObject obj1;
+    //private GameObject obj2;
+    //private GameObject obj3;
     private Rigidbody2D rb;
     void Start()
     {
-        Original01();
-        Original02();
-        Original03();
+        //Original01();
+        //Original02();
+        //Original03();
         count = 0;
         randomNum = 0;
         fallObj = 0;//leaveMouse
@@ -59,6 +59,8 @@ public class CreateObjGame : MonoBehaviour
         randomNum = Random.Range(1, 4);
         if (created)
         {
+            Original00();
+            /*
             if (randomNum == 1)
             {
                 obj = Instantiate(obj1);
@@ -71,48 +73,81 @@ public class CreateObjGame : MonoBehaviour
             {
                 obj = Instantiate(obj3);
             }
+            */
             rb = obj.GetComponent<Rigidbody2D>();
             created = false;
             Debug.Log("CreateObj -> Done");
         }
     }
-    private void Original01()
+    private void Original00()
     {
-        obj1 = new GameObject();
-        obj1.AddComponent<SpriteRenderer>();
-        SpriteRenderer sprd = obj1.GetComponent<SpriteRenderer>();
-        sprd.sprite = SaveImage.spr1;
-        obj1.AddComponent<PolygonCollider2D>();
-        Rigidbody2D rb1 = obj1.AddComponent<Rigidbody2D>();
-        rb1.bodyType = RigidbodyType2D.Kinematic;
+        obj = new GameObject();
+        obj.AddComponent<SpriteRenderer>();
+        SpriteRenderer sprd = obj.GetComponent<SpriteRenderer>();
+        //
+        //sprd.sprite = SaveImage.spr1;
+        //
+        if (randomNum == 1)
+        {
+            sprd.sprite = SaveImage.spr1;
+        }
+        else if (randomNum == 2)
+        {
+            sprd.sprite = SaveImage.spr2;
+        }
+        else if (randomNum == 3)
+        {
+            sprd.sprite = SaveImage.spr3;
+        }
+        //
+        //
+        obj.AddComponent<PolygonCollider2D>();
+        obj.GetComponent<PolygonCollider2D>().enabled = false;
+        Rigidbody2D rb = obj.AddComponent<Rigidbody2D>();
+        rb.bodyType = RigidbodyType2D.Kinematic;
 
-        Vector2 o1 = Camera.main.ScreenToWorldPoint(new Vector2(0, 500));
-        obj1.transform.position = o1;
+        Vector2 po = Camera.main.ScreenToWorldPoint(new Vector2(0, 500));
+        obj.transform.position = po;
     }
-    private void Original02()
-    {
-        obj2 = new GameObject();
-        obj2.AddComponent<SpriteRenderer>();
-        SpriteRenderer sprd = obj2.GetComponent<SpriteRenderer>();
-        sprd.sprite = SaveImage.spr2;
-        obj2.AddComponent<PolygonCollider2D>();
-        Rigidbody2D rb2 = obj2.AddComponent<Rigidbody2D>();
-        rb2.bodyType = RigidbodyType2D.Kinematic;
+/*
+        private void Original01()
+        {
+            obj1 = new GameObject();
+            obj1.AddComponent<SpriteRenderer>();
+            SpriteRenderer sprd = obj1.GetComponent<SpriteRenderer>();
+            sprd.sprite = SaveImage.spr1;
+            obj1.AddComponent<PolygonCollider2D>();
+            Rigidbody2D rb1 = obj1.AddComponent<Rigidbody2D>();
+            rb1.bodyType = RigidbodyType2D.Kinematic;
 
-        Vector2 o2 = Camera.main.ScreenToWorldPoint(new Vector2(50, 500));
-        obj2.transform.position = o2;
-    }
-    private void Original03()
-    {
-        obj3 = new GameObject();
-        obj3.AddComponent<SpriteRenderer>();
-        SpriteRenderer sprd = obj3.GetComponent<SpriteRenderer>();
-        sprd.sprite = SaveImage.spr3;
-        obj3.AddComponent<PolygonCollider2D>();
-        Rigidbody2D rb3 = obj3.AddComponent<Rigidbody2D>();
-        rb3.bodyType = RigidbodyType2D.Kinematic;
+            Vector2 o1 = Camera.main.ScreenToWorldPoint(new Vector2(0, 500));
+            obj1.transform.position = o1;
+        }
+        private void Original02()
+        {
+            obj2 = new GameObject();
+            obj2.AddComponent<SpriteRenderer>();
+            SpriteRenderer sprd = obj2.GetComponent<SpriteRenderer>();
+            sprd.sprite = SaveImage.spr2;
+            obj2.AddComponent<PolygonCollider2D>();
+            Rigidbody2D rb2 = obj2.AddComponent<Rigidbody2D>();
+            rb2.bodyType = RigidbodyType2D.Kinematic;
 
-        Vector2 o3 = Camera.main.ScreenToWorldPoint(new Vector2(100, 500));
-        obj2.transform.position = o3;
-    }
+            Vector2 o2 = Camera.main.ScreenToWorldPoint(new Vector2(50, 500));
+            obj2.transform.position = o2;
+        }
+        private void Original03()
+        {
+            obj3 = new GameObject();
+            obj3.AddComponent<SpriteRenderer>();
+            SpriteRenderer sprd = obj3.GetComponent<SpriteRenderer>();
+            sprd.sprite = SaveImage.spr3;
+            obj3.AddComponent<PolygonCollider2D>();
+            Rigidbody2D rb3 = obj3.AddComponent<Rigidbody2D>();
+            rb3.bodyType = RigidbodyType2D.Kinematic;
+
+            Vector2 o3 = Camera.main.ScreenToWorldPoint(new Vector2(100, 500));
+            obj3.transform.position = o3;
+        }
+        */
 }
