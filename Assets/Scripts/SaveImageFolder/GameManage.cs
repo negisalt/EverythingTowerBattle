@@ -30,13 +30,21 @@ public class GameManage : MonoBehaviour
         else if (fallObj == 1)//横移動＆落とす
         {
             rb.MovePosition(pos);
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKey(KeyCode.A))
             {
-                obj.transform.position = pos;
-                rb.bodyType = RigidbodyType2D.Dynamic;
-                fallObj = 2;
-                created = true;
+                obj.transform.Rotate(0, 0, 2);
             }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                obj.transform.Rotate(0, 0, -2);
+            }
+            if (Input.GetMouseButtonDown(0))
+                {
+                    obj.transform.position = pos;
+                    rb.bodyType = RigidbodyType2D.Dynamic;
+                    fallObj = 2;
+                    created = true;
+                }
         }
         else if (fallObj == 2)//待機
         {
