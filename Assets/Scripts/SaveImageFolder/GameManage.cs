@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CreateObjGame : MonoBehaviour
+public class GameManage : MonoBehaviour
 {
     private int count;
     public PhysicsMaterial2D fri;
@@ -65,9 +65,7 @@ public class CreateObjGame : MonoBehaviour
         obj = new GameObject();
         obj.AddComponent<SpriteRenderer>();
         SpriteRenderer sprd = obj.GetComponent<SpriteRenderer>();
-        //
-        //sprd.sprite = SaveImage.spr1;
-        //
+
         if (randomNum == 1)
         {
             sprd.sprite = SaveImage.spr1;
@@ -80,11 +78,9 @@ public class CreateObjGame : MonoBehaviour
         {
             sprd.sprite = SaveImage.spr3;
         }
-        //
-        //
+
         obj.AddComponent<PolygonCollider2D>();
         obj.GetComponent<PolygonCollider2D>().sharedMaterial = fri;
-        //obj.GetComponent<PolygonCollider2D>().enabled = false;
         Rigidbody2D rb = obj.AddComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
 

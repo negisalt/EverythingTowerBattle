@@ -59,11 +59,4 @@ public class SaveImage : MonoBehaviour
         tex3 = loa3.texture;
         spr3 = Sprite.Create(tex3, new Rect(0, 0, tex3.width, tex3.height), new Vector2(0.5f, 0.5f));
     }
-    /*private void AddCom()
-    {
-        SpriteRenderer sprd = obj.GetComponent<SpriteRenderer>();
-        sprd.sprite = spr;
-        obj.AddComponent<Rigidbody2D>();
-        obj.AddComponent<PolygonCollider2D>();
-    }*/
 }
