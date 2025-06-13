@@ -2,20 +2,20 @@ using UnityEngine;
 
 public class GameManage : MonoBehaviour
 {
-    private int count;
-    public PhysicsMaterial2D fri;
     private Vector2 mouPos;
+    private Vector2 pos;
     private int fallObj;
     private bool created;
     private int randomNum;
-    private Vector2 pos;
     private GameObject obj;
     private Rigidbody2D rb;
+    public PhysicsMaterial2D fri;
+    static public float height;
     void Start()
     {
-        count = 0;
         randomNum = 0;
         fallObj = 0;
+        height = 0.0f;
         created = true;
     }
     public void Update()
@@ -30,26 +30,22 @@ public class GameManage : MonoBehaviour
         else if (fallObj == 1)//横移動＆落とす
         {
             rb.MovePosition(pos);
-            if (Input.GetKey(KeyCode.A))
-            {
-                obj.transform.Rotate(0, 0, 2);
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                obj.transform.Rotate(0, 0, -2);
-            }
+            Roaring();
+
             if (Input.GetMouseButtonDown(0))
-                {
-                    obj.transform.position = pos;
-                    rb.bodyType = RigidbodyType2D.Dynamic;
-                    fallObj = 2;
-                    created = true;
-                }
+            {
+                obj.transform.position = pos;
+                rb.bodyType = RigidbodyType2D.Dynamic;
+                fallObj = 2;
+                created = true;
+            }
         }
         else if (fallObj == 2)//待機
         {
             Invoke("Timer", 2.0f);
         }
+
+        High();
         Debug.Log("fallObj -> " + fallObj);
         Debug.Log("created -> " + created);
     }
@@ -66,6 +62,19 @@ public class GameManage : MonoBehaviour
             rb = obj.GetComponent<Rigidbody2D>();
             created = false;
             Debug.Log("CreateObj -> Done");
+        }
+    }
+    private void Roaring()
+    {
+        if (Input.GetKey(KeyCode.A))//KinematicにしてるからAddTorqueだと回らない
+        {
+            obj.transform.Rotate(0, 0, 2);
+            //rb.AddTorque(200, ForceMode2D.Force);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            obj.transform.Rotate(0, 0, -2);
+            //rb.AddTorque(-200, ForceMode2D.Force);
         }
     }
     private void Original00()
@@ -89,11 +98,15 @@ public class GameManage : MonoBehaviour
 
         obj.AddComponent<PolygonCollider2D>();
         obj.GetComponent<PolygonCollider2D>().sharedMaterial = fri;
-        Rigidbody2D rb = obj.AddComponent<Rigidbody2D>();
+        rb = obj.AddComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
-
 
         Vector2 po = Camera.main.ScreenToWorldPoint(new Vector2(0, 500));
         obj.transform.position = po;
+    }
+    public void High()
+    {
+        height = obj.transform.position.y;
+        Debug.Log("Height = " + height);
     }
 }

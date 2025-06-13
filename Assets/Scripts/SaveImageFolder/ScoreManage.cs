@@ -1,16 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManage : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public Text scoreText;
+    private float score;
     void Start()
     {
-        
+        score = GameManage.height;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        score = GameManage.height;
+        scoreText.text = "score : " + score;
     }
 }
