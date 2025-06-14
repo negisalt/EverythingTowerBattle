@@ -780,11 +780,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 24ccf6cf-ec9c-4245-82ce-ff354a907cd0
+  cloudProjectId: 0cb8870f-1645-45a0-8760-788d3e35cfc4
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: C0deHackathon
-  organizationId: nekogami22
+  projectName: EverythingTowerBattle 2025-06-14_22-14-02
+  organizationId: negi_salt
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
