@@ -5,10 +5,12 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Networking;
 using SFB;
 
 [RequireComponent(typeof(Button))]
-public class OpenImage2 : MonoBehaviour, IPointerDownHandler {
+public class OpenImage2 : MonoBehaviour, IPointerDownHandler
+{
     public RawImage output;
     public static string imageURL2;
 
@@ -34,24 +36,36 @@ public class OpenImage2 : MonoBehaviour, IPointerDownHandler {
     //
     public void OnPointerDown(PointerEventData eventData) { }
 
-    void Start() {
+    void Start()
+    {
         var button = GetComponent<Button>();
         button.onClick.AddListener(OnClick);
     }
 
-    private void OnClick() {
+    private void OnClick()
+    {
         var paths = StandaloneFileBrowser.OpenFilePanel("Title", "", "png", false);
-        if (paths.Length > 0) {
+        if (paths.Length > 0)
+        {
             StartCoroutine(OutputRoutine(new System.Uri(paths[0]).AbsoluteUri));
         }
     }
 #endif
 
-    //public static string ImageURL2;
-    private IEnumerator OutputRoutine(string url2) {
-        var loader = new WWW(url2);
-        imageURL2 = url2;
-        yield return loader;
-        output.texture = loader.texture;
+    private IEnumerator OutputRoutine(string url2)
+    {
+        using (UnityWebRequest loader = UnityWebRequestTexture.GetTexture(url2))
+        {
+            yield return loader.SendWebRequest();
+            if (loader.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(loader.error);
+            }
+            else
+            {
+                imageURL2 = url2;
+                output.texture = DownloadHandlerTexture.GetContent(loader);
+            }
+        }
     }
 }

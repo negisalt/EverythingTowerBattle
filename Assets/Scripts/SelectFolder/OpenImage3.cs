@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Networking;
 using SFB;
 
 [RequireComponent(typeof(Button))]
@@ -47,11 +48,20 @@ public class OpenImage3 : MonoBehaviour, IPointerDownHandler {
     }
 #endif
 
-    //public static string ImageURL3;
-    private IEnumerator OutputRoutine(string url3) {
-        var loader = new WWW(url3);
-        imageURL3 = url3;
-        yield return loader;
-        output.texture = loader.texture;
+    private IEnumerator OutputRoutine(string url3)
+    {
+        using (UnityWebRequest loader = UnityWebRequestTexture.GetTexture(url3))
+        {
+            yield return loader.SendWebRequest();
+            if (loader.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(loader.error);
+            }
+            else
+            {
+                imageURL3 = url3;
+                output.texture = DownloadHandlerTexture.GetContent(loader);
+            }
+        }
     }
 }
