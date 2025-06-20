@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 using SFB;
 
 public class SaveImage : MonoBehaviour
@@ -17,30 +18,38 @@ public class SaveImage : MonoBehaviour
     public static Sprite spr1;
     public static Sprite spr2;
     public static Sprite spr3;
-    
-    /*public void Start()
-    {
-        //obj1.AddComponent<SpriteRenderer>();
-    }*/
+
     public void OnClick()
     {
         //LoadScene(Test);
         StartCoroutine(Spr1());
         StartCoroutine(Spr2());
         StartCoroutine(Spr3());
-        //AddCom();
     }
-    public void LoadScene(string SceneName)
+    /*public void LoadScene(string SceneName)
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneName);
-    }
+    }*/
     private IEnumerator Spr1()
     {
         Debug.Log(OpenImage1.imageURL1);
-        var loa1 = new WWW(OpenImage1.imageURL1);
+        using (UnityWebRequest loa1 = UnityWebRequestTexture.GetTexture(OpenImage1.imageURL1))
+        {
+            yield return loa1.SendWebRequest();
+            if (loa1.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(loa1.error);
+            }
+            else
+            {
+                //imageURL1 = url1;
+                tex1 = DownloadHandlerTexture.GetContent(loa1);
+            }
+        }
+        /*var loa1 = new WWW(OpenImage1.imageURL1);
         yield return loa1;
-        tex1 = loa1.texture;
+        tex1 = loa1.texture;*/
         spr1 = Sprite.Create(tex1, new Rect(0, 0, tex1.width, tex1.height), new Vector2(0.5f, 0.5f));
     }
     private IEnumerator Spr2()
