@@ -21,16 +21,10 @@ public class SaveImage : MonoBehaviour
 
     public void OnClick()
     {
-        //LoadScene(Test);
         StartCoroutine(Spr1());
         StartCoroutine(Spr2());
         StartCoroutine(Spr3());
     }
-    /*public void LoadScene(string SceneName)
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneName);
-    }*/
     private IEnumerator Spr1()
     {
         Debug.Log(OpenImage1.imageURL1);
@@ -43,7 +37,6 @@ public class SaveImage : MonoBehaviour
             }
             else
             {
-                //imageURL1 = url1;
                 tex1 = DownloadHandlerTexture.GetContent(loa1);
             }
         }
@@ -55,17 +48,35 @@ public class SaveImage : MonoBehaviour
     private IEnumerator Spr2()
     {
         Debug.Log(OpenImage2.imageURL2);
-        var loa2 = new WWW(OpenImage2.imageURL2);
-        yield return loa2;
-        tex2 = loa2.texture;
+        using (UnityWebRequest loa2 = UnityWebRequestTexture.GetTexture(OpenImage2.imageURL2))
+        {
+            yield return loa2.SendWebRequest();
+            if (loa2.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(loa2.error);
+            }
+            else
+            {
+                tex2 = DownloadHandlerTexture.GetContent(loa2);
+            }
+        }
         spr2 = Sprite.Create(tex2, new Rect(0, 0, tex2.width, tex2.height), new Vector2(0.5f, 0.5f));
     }
     private IEnumerator Spr3()
     {
         Debug.Log(OpenImage3.imageURL3);
-        var loa3 = new WWW(OpenImage3.imageURL3);
-        yield return loa3;
-        tex3 = loa3.texture;
+        using (UnityWebRequest loa3 = UnityWebRequestTexture.GetTexture(OpenImage3.imageURL3))
+        {
+            yield return loa3.SendWebRequest();
+            if (loa3.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(loa3.error);
+            }
+            else
+            {
+                tex3 = DownloadHandlerTexture.GetContent(loa3);
+            }
+        }
         spr3 = Sprite.Create(tex3, new Rect(0, 0, tex3.width, tex3.height), new Vector2(0.5f, 0.5f));
     }
 }
