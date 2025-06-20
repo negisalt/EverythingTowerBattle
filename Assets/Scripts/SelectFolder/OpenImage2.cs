@@ -10,6 +10,7 @@ using SFB;
 [RequireComponent(typeof(Button))]
 public class OpenImage2 : MonoBehaviour, IPointerDownHandler {
     public RawImage output;
+    public static string imageURL2;
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     //
@@ -17,7 +18,6 @@ public class OpenImage2 : MonoBehaviour, IPointerDownHandler {
     //
     [DllImport("__Internal")]
     private static extern void UploadFile(string gameObjectName, string methodName, string filter, bool multiple);
-    public static string ImageURL2;
 
     public void OnPointerDown(PointerEventData eventData) {
         UploadFile(gameObject.name, "OnFileUpload", ".png, .jpg", false);
@@ -26,7 +26,7 @@ public class OpenImage2 : MonoBehaviour, IPointerDownHandler {
     // Called from browser
     public void OnFileUpload(string url2) {
         StartCoroutine(OutputRoutine(url2));
-        ImageURL2 = url2;
+        imageURL2 = url2;
     }
 #else
     //
@@ -47,10 +47,10 @@ public class OpenImage2 : MonoBehaviour, IPointerDownHandler {
     }
 #endif
 
-    public static string ImageURL2;
+    //public static string ImageURL2;
     private IEnumerator OutputRoutine(string url2) {
         var loader = new WWW(url2);
-        ImageURL2 = url2;
+        imageURL2 = url2;
         yield return loader;
         output.texture = loader.texture;
     }
