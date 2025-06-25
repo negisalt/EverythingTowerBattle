@@ -7,6 +7,7 @@ public class GameManage : MonoBehaviour
     private int fallObj;
     private bool created;
     private int randomNum;
+    private int maxNum;
     private GameObject obj;
     private Rigidbody2D rb;
     public PhysicsMaterial2D fri;
@@ -14,6 +15,7 @@ public class GameManage : MonoBehaviour
     void Start()
     {
         randomNum = 0;
+        maxNum = 5;
         fallObj = 0;
         height = 0.0f;
         created = true;
@@ -55,7 +57,7 @@ public class GameManage : MonoBehaviour
     }
     private void CreateObj()
     {
-        randomNum = Random.Range(1, 4);
+        randomNum = Random.Range(1, maxNum + 1);
         if (created)
         {
             Original00();
@@ -94,6 +96,14 @@ public class GameManage : MonoBehaviour
         else if (randomNum == 3)
         {
             sprd.sprite = SaveImage.spr3;
+        }
+        else if (randomNum == 4)
+        {
+            sprd.sprite = SaveImage.spr4;
+        }
+        else if (randomNum == 5)
+        {
+            sprd.sprite = SaveImage.spr5;
         }
 
         obj.AddComponent<PolygonCollider2D>();
