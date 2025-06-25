@@ -21,7 +21,7 @@ public class GameManage : MonoBehaviour
     public void Update()
     {
         mouPos = Input.mousePosition;
-        pos = Camera.main.ScreenToWorldPoint(new Vector2(mouPos.x, 300));
+        pos = Camera.main.ScreenToWorldPoint(new Vector2(mouPos.x, 720));
         if (fallObj == 0)//生成
         {
             CreateObj();
@@ -101,7 +101,7 @@ public class GameManage : MonoBehaviour
         rb = obj.AddComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
 
-        Vector2 po = Camera.main.ScreenToWorldPoint(new Vector2(0, 500));
+        Vector2 po = Camera.main.ScreenToWorldPoint(new Vector2(500, 1000));
         obj.transform.position = po;
     }
     public void High()
